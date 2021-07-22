@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <th:block th:include="admin/fragments/adminpages.html :: adminheader"></th:block>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <th:block th:include="admin/fragments/adminpages.html :: adminleftmenu"></th:block>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <th:block th:include="admin/fragments/adminpages.html :: admintopmenu"></th:block>
+                <div class="container">
+                    <label>Poszt témája</label>
+                    <form th:action="@{/admin/createposthandling}"  href="#" method="post">
+                        <select class="form-select" th:field="*{post.themes.id}"  name="themes_id">
+                            <!--<option selected>Válassz ki egy témát</option>-->
+                            <option th:each="postcategories:${postcategories}" th:value="${postcategories.id}" th:text="${postcategories.name}">One</option>
+                        </select>
+                        </br>
+                        </br>
+                        <label>Poszt Címe</label>
+                        <input type="hidden" th:field="*{post.id}">
+                        <input type="text" class="col-12" placeholder="Pár szóban mi lesz a cím" th:field="*{post.title}">
+
+                        <label>Poszt rövid leírás a főoldalra</label>
+                        <textarea class="col-12"  placeholder="Egy-két mondat a cikkről." th:field="*{post.postheader}"></textarea>                    
+
+                        <label>A cikk</label>
+                        <textarea class="col-12" rows="20" placeholder="Egy-két mondat a cikkről." id="editor" th:field="*{post.content}"></textarea>
+
+                        <button type="submit" class="btn btn-primary m-2">Mentés</button>
+                        <a href="#" data-toggle="modal" data-target="#delete" class="btn btn-danger">Poszt törlése</a>
+                    </form>
+                    
+                    <!--Are you sure pop up-->
+
+                    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Figyelem!</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Biztos ki akarod törölni a posztot?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <a class="btn btn-danger" th:href="@{/admin/deleteblogpost/{id}(id = ${post.id})}">Törlés</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <th:block th:include="admin/fragments/adminpages.html :: adminfooter"></th:block>
+        </div>
+    </div>
+    <script>
+        ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+    </script>
+
+</body>
+</html>

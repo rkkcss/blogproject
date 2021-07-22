@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <th:block th:include="admin/fragments/adminpages.html :: adminheader"></th:block>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <th:block th:include="admin/fragments/adminpages.html :: adminleftmenu"></th:block>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <th:block th:include="admin/fragments/adminpages.html :: admintopmenu"></th:block>
+                <div class="container">
+                    <div class="align-content-end">
+                        <a href="#" data-target="#addtheme" data-toggle="modal" class="mb-4">Blog téma hozzáadása</a>
+
+                        <!--Popp up for add new blog theme-->
+
+                        <div class="modal fade" id="addtheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/admin/createblogpost/addtheme}" th:object="${themes}" method="post">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Téma hozzáadás!</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Adj hozzá témát</div>
+                                        <div class="col-12">
+
+                                            <input class="col-12" th:field="*{name}" type="text" placeholder="Blog téma">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Mégsem</button>
+                                            <button type="submit" class="btn btn-primary">Hozzáadás</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--End pop up-->
+
+                    </div>
+                    <label>Poszt témája</label>
+                    <form th:action="@{/admin/createposthandling}" th:object="${post}" href="#" method="post">
+                        <select class="form-select col-2" th:field="*{themes}" aria-label="Default select example" name="themes_id">
+                            <!--<option selected>Válassz ki egy témát</option>-->
+                            <option th:each="postcategories:${postcategories}" th:value="${postcategories.id}" th:text="${postcategories.name}">One</option>
+                        </select>
+                        </br>
+                        </br>
+                        <label>Poszt Címe</label>
+                        <input type="text" class="col-12" placeholder="Pár szóban mi lesz a cím" th:field="*{title}">
+
+                        <label>Poszt rövid leírás a főoldalra</label>
+                        <textarea class="col-12"  placeholder="Egy-két mondat a cikkről." th:field="*{postheader}"></textarea>                    
+
+                        <label>A cikk</label>
+                        <textarea class="col-12" rows="20" placeholder="Egy-két mondat a cikkről." id="editor" th:field="*{content}"></textarea>
+
+                        <button type="submit" class="btn btn-primary m-2">Posztolás</button>
+                    </form>
+                </div>
+            </div>
+            <th:block th:include="admin/fragments/adminpages.html :: adminfooter"></th:block>
+        </div>
+        <!-- Footer -->
+
+    </div>
+    <script>
+        ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-12">
+                <form th:action="@{/admin/posted}" action="#" method="post" th:object="${post}">
+                    <div class="row">
+                        <div class="col-1">
+                            <label>Cím</label>
+                        </div>
+                        <div class="col-9">
+                            <textarea placeholder="Ide írd a szöveget" th:field="*{title}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-1">
+                            <label>Post</label>
+                        </div>
+                        <div class="col-9">
+                            <textarea th:field="*{content}" rows="20" cols="150" placeholder="Ide írd a szöveget" style="resize: none"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="col-4 text-center p-2">
+                            <button class="btn btn-primary text-center">Posztolás</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <title>Bejelentkezés</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="display-4 p-2 text-center">Sign In</h5>
+                            <form th:action="@{/admin/reg}" th:object="${blogger}" method="post" class="form-signin">
+                                <div class="form-label-group">
+                                    <label for="inputEmail">Név</label>
+                                    <input th:field="*{name}" name="name" type="text" id="inputEmail" class="form-control" placeholder="Név" required autofocus>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input th:field="*{password}" name="password" type="password" id="inputPassword" class="form-control" placeholder="Jelszó" required>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <!--<label class="custom-control-label" for="customCheck1">Remember password</label>-->
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

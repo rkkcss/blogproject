@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Admin - Üzenetek</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:include="admin/fragments/adminpages.html :: adminheader"></th:block>
+</head>
+<body>
+    <div id="wrapper">
+        <th:block th:include="admin/fragments/adminpages.html :: adminleftmenu"></th:block>
+
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="admin/fragments/adminpages.html :: admintopmenu"></th:block>
+                <div class="container-fluid">
+                    <h3 class="mb-4">Üzenetek</h3>
+                        <div class="row mb-2 text-black border-bottom-info align-items-center">
+                            <div class="col-2">
+                                <span>Üzenet feladója</span>
+                            </div>
+                            <div class="col-2">
+                                <span>Email címe</span>
+                            </div>
+                            <div class="col">
+                                <span>Üzenet tárgya</span>
+                            </div>
+                            <div class="col">
+                                <span>Üzenet</span>
+                            </div>
+                        </div>
+                    
+                    <a th:each="messages:${messages}" href="#" class="hovermessages">
+                        <div  class="row  align-items-center hovermessages">
+                            <div class="col-2">
+                                <span th:text="${messages.name}">Üzenet feladója</span>
+                            </div>
+                            <div class="col-2">
+                                <span th:text="${messages.email}">Email címe</span>
+                            </div>
+                            <div class="col">
+                                <span th:text="${messages.title}">Üzenet tárgya</span>
+                            </div>
+                            <div class="col">
+                                <span th:text="${messages.message}">Üzenet</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<th:block th:include="admin/fragments/adminpages.html :: adminfooter"></th:block>
+<!-- End of Footer -->
+</body>
+</html>
