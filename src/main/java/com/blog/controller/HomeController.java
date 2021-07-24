@@ -49,20 +49,22 @@ public class HomeController {
     public String indexPage(Model model) {
         List<Post> post = postRepo.findAll();
         List<Themes> themes = themesRepo.findAll();
-        
+
         model.addAttribute("post", post);
         model.addAttribute("themes", themes);
         return "index";
     }
 
     @RequestMapping("/themes/{name}")
-    public String themesPageByName( @PathVariable(value = "name") String name, Model model){
+    public String themesPageByName(@PathVariable(value = "name") String name, Model model) {
         List<Post> post = postRepo.findAllByThemesName(name);
-        
-        model.addAttribute("post",post);
+        List<Themes> themes = themesRepo.findAll();
+
+        model.addAttribute("themes", themes);
+        model.addAttribute("post", post);
         return "searchbytheme";
     }
-    
+
     @RequestMapping("/")
     public String indexPage2() {
         return "redirect:/index";
@@ -71,8 +73,11 @@ public class HomeController {
     @RequestMapping("/posts/{id}")
     public String singleBlogPost(@PathVariable(value = "id") int id, Post post, Model model) {
         post = postRepo.findById(id);
-        model.addAttribute("post", post);
+        List<Themes> themes = themesRepo.findAll();
         List<Comments> commentsList = commentsRepo.findAllByPostId(id);
+        
+        model.addAttribute("themes", themes);
+        model.addAttribute("post", post);
         model.addAttribute("commentsList", commentsList);
         model.addAttribute("commentsize", commentsList.size());
         model.addAttribute("comments", new Comments());
