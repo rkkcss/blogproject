@@ -108,4 +108,11 @@ public class AdminController {
         return "/admin/messages";
     }
 
+    //check blog posts how it looks after created
+    @RequestMapping("/checkblogposts")
+    public String checkBlogPosts(Model model) {
+        List<Messages> messages = messagesRepo.findAll();
+        model.addAttribute("messages", messages);
+        return "/admin/checkblogposts";
+    }
 }
